@@ -1,0 +1,64 @@
+/**
+ * Espaçamento entre elementos do relatório
+ * Tabelas, texto, imagens...
+ */
+$spacing-between-el: 2rem;
+$spacing: $spacing-between-el * 2;
+$spacing-separator: $spacing-between-el * 3;
+
+.relatorios-wrapper {
+  padding-top: $spacing;
+  padding-bottom: $spacing;
+
+  text-align: left;
+}
+
+.text-wrapper {
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+
+  > p {
+    font-size: 16px;
+    line-height: 1.4;
+    font-weight: 400;
+    margin-top: $spacing-between-el;
+    margin-bottom: 0;
+
+    @media (min-width: 768px) {
+      font-size: 20px;
+    }
+
+    &.note {
+      font-size: 0.8em;
+
+      @media (min-width: 768px) {
+        font-size: 0.9em;
+      }
+    }
+  }
+
+  > h1 {
+    font-family: "Libre Baskerville";
+    font-size: 32px;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 0;
+
+    @media (min-width: 768px) {
+      font-size: 44px;
+    }
+  }
+
+  > h2 {
+    font-family: "Roboto";
+    font-size: 24px;
+    font-weight: 700;
+    margin-top: 2.5rem;
+    margin-bottom: 0;
+
+    @media (min-width: 768px) {
+      font-size: 28px;
+    }
+  }
+}
