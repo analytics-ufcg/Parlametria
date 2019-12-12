@@ -29,7 +29,13 @@ function sort(parlamentares: any[], column: string, direction: string): any[] {
     return parlamentares;
   } else {
     return [...parlamentares].sort((a, b) => {
-      const res = compare(a[column], b[column]);
+      let res = compare(a[column], b[column]);
+      if (column === 'nome_eleitoral') {
+        // compara nome eleitoral sem acentos e pontuações
+        res = compare(
+          a[column].normalize('NFD').replace(/[\u0300-\u036f]/g, ""),
+          b[column].normalize('NFD').replace(/[\u0300-\u036f]/g, ""));
+      }
       return direction === 'asc' ? res : -res;
     });
   }
@@ -75,7 +81,7 @@ export class RuralistasAmbientalistasService {
   }
 
   getJson() {
-    return this.http.get('/data/grupos_relacionados_ao_agro_ambientalistas.json')
+    return this.http.get('/data/deputados_relacionados_ao_agro_ambientalistas.json')
       .subscribe(p => {
         this.PARLAMENTARES = p;
         this._search$.next();

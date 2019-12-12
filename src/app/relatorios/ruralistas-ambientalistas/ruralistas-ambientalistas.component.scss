@@ -62,3 +62,19 @@ $spacing-separator: $spacing-between-el * 3;
     }
   }
 }
+
+.form-table {
+  margin-top: $spacing-between-el;
+}
+
+.table-wrapper {
+  // display: flex;
+}
+
+.table-grupos-ruralistas {
+  height: 500px;
+  width: 100%;
+  // display: inline-block;
+  // overflow-x: scroll;
+  font-size: 20px;
+}

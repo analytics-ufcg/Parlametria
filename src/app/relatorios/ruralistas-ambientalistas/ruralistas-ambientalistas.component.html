@@ -5,110 +5,427 @@
         <a id="inicio"></a>
         Ruralistas vs Ambientalistas
       </h1>
-
-      <form>
+      <h2>
+        Os grupos e subgrupos dos deputados federais
+      </h2>
+      <form class="form-table">
         <div class="form-group form-inline">
-          Pesquisar:
-          <input
-            class="form-control ml-2"
-            type="text"
-            name="searchTerm"
-            [(ngModel)]="service.searchTerm"
-          >
           <span
-            class="ml-3"
+            class="ml-2"
             *ngIf="service.loading$ | async"
           >
             Carregando...
           </span>
+          <input
+            class="form-control ml-auto"
+            type="text"
+            name="searchTerm"
+            [(ngModel)]="service.searchTerm"
+            placeholder="Pesquisar"
+          >
+
         </div>
-
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th
-                scope="col"
-                sortable="name"
-                (sort)="onSort($event)"
-              >
-                Parlamentar
-              </th>
-              <th
-                scope="col"
-                sortable="area"
-                (sort)="onSort($event)"
-              >
-                Partido
-              </th>
-              <th
-                scope="col"
-                sortable="population"
-                (sort)="onSort($event)"
-              >
-                UF
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let country of parlamentares$ | async">
-              <th scope="row">{{ country.id }}</th>
-              <td>
-                <ngb-highlight
-                  [result]="country.nome_eleitoral"
-                  [term]="service.searchTerm"
-                ></ngb-highlight>
-              </td>
-              <td>
-                <ngb-highlight
-                  [result]="country.sg_partido"
-                  [term]="service.searchTerm"
-                ></ngb-highlight>
-              </td>
-              <td>
-                <ngb-highlight
-                  [result]="country.uf"
-                  [term]="service.searchTerm"
-                ></ngb-highlight>
-              </td>
-              <!-- <td>
-                <ngb-highlight
-                  [result]="country.area | number"
-                  [term]="service.searchTerm"
-                ></ngb-highlight>
-              </td>
-              <td>
-                <ngb-highlight
-                  [result]="country.population | number"
-                  [term]="service.searchTerm"
-                ></ngb-highlight>
-              </td> -->
-            </tr>
-          </tbody>
-        </table>
-
-        <div class="d-flex justify-content-between p-2">
+        <div class="table-wrapper">
+          <table class="table table-striped table-grupos-ruralistas">
+            <thead>
+              <tr>
+                <!-- <th scope="col">#</th> -->
+                <th
+                  scope="col"
+                  sortable="nome_eleitoral"
+                  (sort)="onSort($event)"
+                >
+                  Parlamentar
+                </th>
+                <th
+                  scope="col"
+                  sortable="sg_partido"
+                  (sort)="onSort($event)"
+                >
+                  Partido
+                </th>
+                <th
+                  scope="col"
+                  sortable="uf"
+                  (sort)="onSort($event)"
+                >
+                  UF
+                </th>
+                <th
+                  scope="col"
+                  sortable="tem_propriedade_rural"
+                  (sort)="onSort($event)"
+                >
+                Tem propriedade rural
+                </th>
+                <th
+                  scope="col"
+                  sortable="total_declarado_propriedade_rural"
+                  (sort)="onSort($event)"
+                >
+                Total declarado em propriedade rural
+                </th>
+                <th
+                  scope="col"
+                  sortable="tem_empresa_agricola"
+                  (sort)="onSort($event)"
+                >
+                Tem empresa agrícola
+                </th>
+                <th
+                  scope="col"
+                  sortable="proporcao_doacoes_agro"
+                  (sort)="onSort($event)"
+                >
+                Proporção de doações agro
+                </th>
+                <th
+                  scope="col"
+                  sortable="tem_empresa_agroexportadora"
+                  (sort)="onSort($event)"
+                >
+                Tem empresa agroexportadora
+                </th>
+                <th
+                  scope="col"
+                  sortable="proporcao_doacoes_agroexportadoras"
+                  (sort)="onSort($event)"
+                >
+                Proporção de doações agroexportadoras
+                </th>
+                <th
+                  scope="col"
+                  sortable="indice_vinculo_economico_agro"
+                  (sort)="onSort($event)"
+                >
+                  Índice de vínculo com agro
+                </th>
+                <th
+                  scope="col"
+                  sortable="frente_agropecuaria"
+                  (sort)="onSort($event)"
+                >
+                Frente agropecuária
+                </th>
+                <th
+                  scope="col"
+                  sortable="frente_mineracao"
+                  (sort)="onSort($event)"
+                >
+                Frente mineração
+                </th>
+                <th
+                  scope="col"
+                  sortable="frente_livre_mercado"
+                  (sort)="onSort($event)"
+                >
+                Frente livre mercado
+                </th>
+                <th
+                  scope="col"
+                  sortable="combo_agro_mineracao_lm"
+                  (sort)="onSort($event)"
+                >
+                Combo agro+mineração+lm
+                </th>
+                <th
+                  scope="col"
+                  sortable="combo_5_frentes_progressistas"
+                  (sort)="onSort($event)"
+                >
+                Combo 5 frentes progressistas
+                </th>
+                <th
+                  scope="col"
+                  sortable="discurso_normalizado"
+                  (sort)="onSort($event)"
+                >
+                Discurso normalizado - RAC
+                </th>
+                <th
+                  scope="col"
+                  sortable="aderencia"
+                  (sort)="onSort($event)"
+                >
+                Aderência
+                </th>
+                <th
+                  scope="col"
+                  sortable="proposicoes_meio_ambiente_indice"
+                  (sort)="onSort($event)"
+                >
+                Índice de proposições do MA
+                </th>
+                <th
+                  scope="col"
+                  sortable="requerimentos_informacao_agro_mma_indice"
+                  (sort)="onSort($event)"
+                >
+                Índice de R.I. agro ou MA
+                </th>
+                <th
+                  scope="col"
+                  sortable="indice_ativismo_ambiental"
+                  (sort)="onSort($event)"
+                >
+                  Índice de ativismo ambiental
+                </th>
+                <th
+                  scope="col"
+                  sortable="participou_movimento_renovacao"
+                  (sort)="onSort($event)"
+                >
+                Participou de movimento de renovação
+                </th>
+                <th
+                  scope="col"
+                  sortable="investimento_partidario"
+                  (sort)="onSort($event)"
+                >
+                Investimento partidário
+                </th>
+                <th
+                  scope="col"
+                  sortable="numero_de_mandatos"
+                  (sort)="onSort($event)"
+                >
+                Número de mandatos
+                </th>
+                <th
+                  scope="col"
+                  sortable="indice_comissoes"
+                  (sort)="onSort($event)"
+                >
+                Índice de comissoes
+                </th>
+                <th
+                  scope="col"
+                  sortable="indice_liderancas"
+                  (sort)="onSort($event)"
+                >
+                  Índice de lideranças
+                </th>
+                <th
+                  scope="col"
+                  sortable="indice_cargo_mesa"
+                  (sort)="onSort($event)"
+                >
+                Índice de cargos de mesa
+                </th>                
+                <th
+                  scope="col"
+                  sortable="indice_influencia_parlamentar"
+                  (sort)="onSort($event)"
+                >
+                  Índice de influência parlamentar
+                </th>
+                <th
+                  scope="col"
+                  sortable="grupo"
+                  (sort)="onSort($event)"
+                >
+                  Grupo
+                </th>
+                <th
+                  scope="col"
+                  sortable="subgrupo"
+                  (sort)="onSort($event)"
+                >
+                  Subgrupo
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let parlamentar of parlamentares$ | async">
+                <!-- <th scope="row">{{ parlamentar.id }}</th> -->
+                <td>
+                  <ngb-highlight
+                    [result]="parlamentar.nome_eleitoral"
+                    [term]="service.searchTerm"
+                  ></ngb-highlight>
+                </td>
+                <td>
+                  <ngb-highlight
+                    [result]="parlamentar.sg_partido"
+                    [term]="service.searchTerm"
+                  ></ngb-highlight>
+                </td>
+                <td>
+                  <ngb-highlight
+                    [result]="parlamentar.uf"
+                    [term]="service.searchTerm"
+                  ></ngb-highlight>
+                </td>
+                <td>
+                  <ngb-highlight
+                    [result]="parlamentar.tem_propriedade_rural"
+                    [term]="service.searchTerm"
+                  ></ngb-highlight>
+                </td>
+                <td>
+                  <ngb-highlight
+                    [result]="parlamentar.total_declarado_propriedade_rural"
+                    [term]="service.searchTerm"
+                  ></ngb-highlight>
+                </td>
+                <td>
+                  <ngb-highlight
+                    [result]="parlamentar.tem_empresa_agricola"
+                    [term]="service.searchTerm"
+                  ></ngb-highlight>
+                </td>
+                <td>
+                  <ngb-highlight
+                    [result]="parlamentar.proporcao_doacoes_agro"
+                    [term]="service.searchTerm"
+                  ></ngb-highlight>
+                </td>
+                <td>
+                  <ngb-highlight
+                    [result]="parlamentar.tem_empresa_agroexportadora"
+                    [term]="service.searchTerm"
+                  ></ngb-highlight>
+                </td>
+                <td>
+                  <ngb-highlight
+                    [result]="parlamentar.proporcao_doacoes_agroexportadoras"
+                    [term]="service.searchTerm"
+                  ></ngb-highlight>
+                </td>
+                <td>
+                  <ngb-highlight
+                    [result]="parlamentar.indice_vinculo_economico_agro | number"
+                    [term]="service.searchTerm"
+                  ></ngb-highlight>
+                </td>
+                <td>
+                  <ngb-highlight
+                    [result]="parlamentar.frente_agropecuaria | number"
+                    [term]="service.searchTerm"
+                  ></ngb-highlight>
+                </td>
+                <td>
+                  <ngb-highlight
+                    [result]="parlamentar.frente_mineracao | number"
+                    [term]="service.searchTerm"
+                  ></ngb-highlight>
+                </td>
+                <td>
+                  <ngb-highlight
+                    [result]="parlamentar.frente_livre_mercado | number"
+                    [term]="service.searchTerm"
+                  ></ngb-highlight>
+                </td>
+                <td>
+                  <ngb-highlight
+                    [result]="parlamentar.combo_agro_mineracao_lm | number"
+                    [term]="service.searchTerm"
+                  ></ngb-highlight>
+                </td>
+                <td>
+                  <ngb-highlight
+                    [result]="parlamentar.combo_5_frentes_progressistas | number"
+                    [term]="service.searchTerm"
+                  ></ngb-highlight>
+                </td>
+                <td>
+                  <ngb-highlight
+                    [result]="parlamentar.discurso_normalizado | number"
+                    [term]="service.searchTerm"
+                  ></ngb-highlight>
+                </td>
+                <td>
+                  <ngb-highlight
+                    [result]="parlamentar.aderencia | number"
+                    [term]="service.searchTerm"
+                  ></ngb-highlight>
+                </td>
+                <td>
+                  <ngb-highlight
+                    [result]="parlamentar.proposicoes_meio_ambiente_indice | number"
+                    [term]="service.searchTerm"
+                  ></ngb-highlight>
+                </td>
+                <td>
+                  <ngb-highlight
+                    [result]="parlamentar.requerimentos_informacao_agro_mma_indice | number"
+                    [term]="service.searchTerm"
+                  ></ngb-highlight>
+                </td>
+                <td>
+                  <ngb-highlight
+                    [result]="parlamentar.indice_ativismo_ambiental | number"
+                    [term]="service.searchTerm"
+                  ></ngb-highlight>
+                </td>
+                <td>
+                  <ngb-highlight
+                    [result]="parlamentar.participou_movimento_renovacao | number"
+                    [term]="service.searchTerm"
+                  ></ngb-highlight>
+                </td>
+                <td>
+                  <ngb-highlight
+                    [result]="parlamentar.investimento_partidario | number"
+                    [term]="service.searchTerm"
+                  ></ngb-highlight>
+                </td>
+                <td>
+                  <ngb-highlight
+                    [result]="parlamentar.numero_de_mandatos | number"
+                    [term]="service.searchTerm"
+                  ></ngb-highlight>
+                </td>
+                <td>
+                  <ngb-highlight
+                    [result]="parlamentar.indice_comissoes | number"
+                    [term]="service.searchTerm"
+                  ></ngb-highlight>
+                </td>
+                <td>
+                  <ngb-highlight
+                    [result]="parlamentar.indice_liderancas | number"
+                    [term]="service.searchTerm"
+                  ></ngb-highlight>
+                </td>
+                <td>
+                  <ngb-highlight
+                    [result]="parlamentar.indice_cargo_mesa | number"
+                    [term]="service.searchTerm"
+                  ></ngb-highlight>
+                </td>
+                <td>
+                  <ngb-highlight
+                    [result]="parlamentar.indice_influencia_parlamentar | number"
+                    [term]="service.searchTerm"
+                  ></ngb-highlight>
+                </td>
+                <td>
+                  <ngb-highlight
+                    [result]="parlamentar.grupo"
+                    [term]="service.searchTerm"
+                  ></ngb-highlight>
+                </td>
+                <td>
+                  <ngb-highlight
+                    [result]="parlamentar.subgrupo"
+                    [term]="service.searchTerm"
+                  ></ngb-highlight>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="d-flex justify-content-center p-2">
           <ngb-pagination
             [collectionSize]="total$ | async"
             [(page)]="service.page"
             [pageSize]="service.pageSize"
+            [maxSize]="5"
           >
           </ngb-pagination>
-
-          <select
-            class="custom-select"
-            style="width: auto"
-            name="pageSize"
-            [(ngModel)]="service.pageSize"
-          >
-            <option [ngValue]="10">10 items per page</option>
-            <option [ngValue]="25">25 items per page</option>
-            <option [ngValue]="50">50 items per page</option>
-          </select>
         </div>
-
       </form>
-
     </div>
   </div>
 </div>
