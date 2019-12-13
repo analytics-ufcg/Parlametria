@@ -42,9 +42,9 @@ function sort(parlamentares: any[], column: string, direction: string): any[] {
 }
 
 function matches(parlamentar: any, term: string, pipe: PipeTransform) {
-  return parlamentar.nome_eleitoral.toLowerCase().includes(term.toLowerCase());
-  // || pipe.transform(parlamentar.area).includes(term)
-  // || pipe.transform(parlamentar.population).includes(term);
+  return parlamentar.nome_eleitoral.toLowerCase().includes(term.toLowerCase())
+  || parlamentar.sg_partido.toLowerCase().includes(term.toLowerCase())
+  || parlamentar.uf.toLowerCase().includes(term.toLowerCase());
 }
 
 @Injectable({ providedIn: 'root' })
