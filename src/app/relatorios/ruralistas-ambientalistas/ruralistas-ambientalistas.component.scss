@@ -68,13 +68,13 @@ $spacing-separator: $spacing-between-el * 3;
 }
 
 .table-wrapper {
-  // display: flex;
+  display: flex;
 }
 
 .table-grupos-ruralistas {
   height: 500px;
   width: 100%;
-  // display: inline-block;
-  // overflow-x: scroll;
+  display: inline-block;
+  overflow-x: scroll;
   font-size: 12px;
 }
